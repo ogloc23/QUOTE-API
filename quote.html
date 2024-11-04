@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QUOTE API</title>
+    <link rel="stylesheet" href="quote.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      function getQuote() {
+        $.ajax({
+          method: "GET",
+          url: "https://api.api-ninjas.com/v1/quotes?",
+          headers: { "X-Api-Key": "S+y3CuHCR2Ag1ELZfrNuqA==mcBlFsgq9DJoFbhh" },
+          contentType: "application/json",
+          success: function (result) {
+            document.getElementById("quote").innerHTML = result[0].quote;
+            document.getElementById("author").innerHTML = result[0].author;
+            document.getElementById("category").innerHTML = result[0].category;
+            console.log(result);
+          },
+          error: function ajaxError(jqXHR) {
+            console.error("Error: ", jqXHR.responseText);
+          },
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <div class="quoteHeading">
+      <h1>QUOTES</h1>
+    </div>
+    <div class="input-Btn">
+      <form>
+        <label for="quote">QUOTE:</label>
+        <input type="text" />
+      </form>
+      <button onclick="getQuote()">QUOTE</button>
+    </div>
+
+    <p id="quote"></p>
+    <p id="author"></p>
+    <p id="category"></p>
+  </body>
+</html>
